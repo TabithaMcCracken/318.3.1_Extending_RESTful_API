@@ -81,4 +81,25 @@ router
     else next();
   });
 
-module.exports = router;
+
+
+
+
+//   GET /api/users/:id/posts
+//   Retrieves all posts by a user with the specified id.
+router.get('/:id/posts'),((req, res) => {
+    const userId = req.params.id;
+
+    if(!user){
+        return next (error(404, "User not found"));
+    } 
+    
+    const userPosts =posts.filter((post) => post.userId == userId);
+    if (userPosts.length === 0){
+        return next (error(404, "No posts found for this user"));
+        }
+
+    res.json({ userPosts})
+  })
+
+  module.exports = router;
